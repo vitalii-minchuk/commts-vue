@@ -10,10 +10,22 @@ export default {
 
 <template>
     <header>
-        <h2>{{ logo }}</h2>
+        <RouterLink class="link" to="/">
+            <h2>{{ logo }}</h2>
+        </RouterLink>
+        <nav>
+            <RouterLink to="/posts">
+                Posts
+            </RouterLink>
+            <RouterLink to="/comments">
+                Comments
+            </RouterLink>
+        </nav>
     </header>
 </template>
 
-<style>
-
+<style scoped>
+.link {
+    text-decoration: none;
+}
 </style>

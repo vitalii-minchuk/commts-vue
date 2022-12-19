@@ -2,7 +2,7 @@
 export default {
     props: {
         modelValue: {
-            type: String
+            type: [String, Number]
         },
         options: {
             type: Array,

@@ -6,6 +6,9 @@ export default {
             type: String,
             default: "text"
         },
+        placeholder: {
+            type: String,
+        },
         modelValue: [String]
     },
     methods: {
@@ -18,7 +21,7 @@ export default {
 </script>
 
 <template>
-    <input :value="modelValue" @input.trim="updateInput" type="inputType">
+    <input :value="modelValue" @input.trim="updateInput" :placeholder="placeholder" type="inputType">
 </template>
 
 <style>
