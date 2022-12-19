@@ -3,29 +3,41 @@ export default {
     data() {
         return {
             post: {
-                description: "",
+                id: 0,
+                body: "",
                 title: ""
             }
-        }
+        };
     },
     methods: {
         createNewPost() {
-            console.log(this.post)
-            this.post.id = Date.now()
-            this.$emit("create", this.post)
-            this.post = {
-                title: "",
-                description: ""
+            if (this.post.title && this.post.body) {
+                this.post.id = Date.now();
+                this.$emit("create", this.post);
+                this.post = {
+                    id: 0,
+                    title: "",
+                    body: ""
+                };
             }
         }
-    }
+    },
 }
 </script>
 
 <template>
     <form @submit.prevent="createNewPost">
-        <input v-model="post.title" type="text">
-        <input v-model="post.description" type="text">
-        <button type="submit">add</button>
+        <MyInput v-model="post.title" />
+        <MyInput v-model="post.body" />
+        <MyButton type="submit">add</MyButton>
     </form>
 </template>
+
+<style>
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px 30px;
+}
+</style>

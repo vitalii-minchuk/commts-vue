@@ -5,14 +5,22 @@ export default {
             type: Object,
             required: true
         }
+    },
+    methods: {
+        deletePost() {
+            this.$emit('remove', this.post.id)
+        }
     }
+
 }
 </script>
 
 <template>
     <div class="post">
+        <p>{{ post.id }}</p>
         <h4>{{ post.title }}</h4>
-        <p>{{ post.description }}</p>
+        <p>{{ post.body }}</p>
+        <MyButton @click="deletePost" :color="'pink'">Delete</MyButton>
     </div>
 </template>
 
