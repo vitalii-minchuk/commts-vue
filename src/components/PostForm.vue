@@ -27,7 +27,7 @@ export default {
 
 <template>
     <form @submit.prevent="createNewPost">
-        <MyInput v-model="post.title" />
+        <MyInput v-focus v-model="post.title" />
         <MyInput v-model="post.body" />
         <MyButton type="submit">add</MyButton>
     </form>

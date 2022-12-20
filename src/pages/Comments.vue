@@ -13,13 +13,21 @@ export default {
     },
     methods: {
         async fetchComments() {
-            const response = await axios.get("https://jsonplaceholder.typicode.com/comments", {
-                params: {
-                    _limit: 10,
-                    _page: this.currentPage
-                }
-            });
-            this.comments = [...this.comments, ...response.data];
+            try {
+                this.isLoading = true
+                const response = await axios.get("https://jsonplaceholder.typicode.com/comments", {
+                    params: {
+                        _limit: 10,
+                        _page: this.currentPage
+                    }
+                });
+                this.comments = [...this.comments, ...response.data];
+
+            } catch (error: any) {
+                console.log(error.message, "something went wrong")
+            } finally {
+                this.isLoading = false
+            }
         },
         createObserver() {
             const options = {
@@ -28,7 +36,7 @@ export default {
             };
             const handleIntersect = (entries: IntersectionObserverEntry[]) => {
                 if (entries[0].isIntersecting) {
-                    this.currentPage++
+                    this.currentPage += 1
                 }
             }
 
@@ -50,9 +58,10 @@ export default {
 </script>
 
 <template>
-    <div v-if="isLoading">Loading ...</div>
     <CommentList :comments="comments" />
-    <div ref="observableDiv"></div>
+    <div ref="observableDiv">
+        <div v-if="isLoading">Loading ...</div>
+    </div>
 </template>
 
 <style>

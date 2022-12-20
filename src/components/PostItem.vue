@@ -20,7 +20,10 @@ export default {
         <p>{{ post.id }}</p>
         <h4>{{ post.title }}</h4>
         <p>{{ post.body }}</p>
-        <MyButton @click="deletePost" :color="'pink'">Delete</MyButton>
+        <div>
+            <MyButton @click="$router.push(`/posts/${post.id}`)">details</MyButton>
+            <MyButton @click="deletePost" :color="'pink'">Delete</MyButton>
+        </div>
     </div>
 </template>
 

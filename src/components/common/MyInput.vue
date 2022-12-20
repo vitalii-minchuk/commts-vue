@@ -21,13 +21,15 @@ export default {
 </script>
 
 <template>
-    <input :value="modelValue" @input.trim="updateInput" :placeholder="placeholder" type="inputType">
+    <input class="input" :value="modelValue" @input.trim="updateInput" :placeholder="placeholder" type="inputType">
 </template>
 
-<style>
-input {
+<style scoped>
+.input {
     width: 100%;
     height: 40px;
     border: 1px solid teal;
+    padding: 0 10px;
+    border-radius: 8px;
 }
 </style>

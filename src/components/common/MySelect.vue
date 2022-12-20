@@ -18,11 +18,17 @@ export default {
 </script>
 
 <template>
-    <select @change="changeOption">
+    <select class="select" @change="changeOption">
         <option v-for="option in options" :value="option">{{ option }}</option>
     </select>
 </template>
 
-<style>
-
+<style scoped>
+.select {
+    padding: 0 5px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid teal;
+    cursor: pointer;
+}
 </style>

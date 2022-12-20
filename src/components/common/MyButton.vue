@@ -9,14 +9,21 @@ export default {
 }
 </script>
 <template>
-    <button :style="{ backgroundColor: color }">
+    <button class="btn" :style="{ backgroundColor: color }">
         <slot></slot>
     </button>
 </template>
 
 <style scoped>
-button {
-    width: 100px;
+.btn {
+    padding: 0 20px;
     height: 40px;
+    border-radius: 8px;
+    border: 1px solid teal;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.7;
 }
 </style>

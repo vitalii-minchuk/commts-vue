@@ -36,7 +36,8 @@ export default {
     },
     methods: {
         createPost(post: Post) {
-            this.posts.push(post)
+            // this.posts.push(post)
+            this.posts = [post, ...this.posts]
             this.isDialogVisible = false
         },
         removePost(id: number) {
@@ -121,28 +122,29 @@ export default {
 </script>
 
 <template>
-    <div class="actions">
-        <MyButton @click="openDialog">Create new post</MyButton>
-
-        <div>
-            <p>show</p>
-            <MySelect v-model="showPosts" :options="showPagesOptions" />
+    <div class="container">
+        <div class="actions">
+            <MyButton @click="openDialog">Create new post</MyButton>
+            <div class="show-pages">
+                <p>show</p>
+                <MySelect v-model="showPosts" :options="showPagesOptions" />
+            </div>
+            <div>
+                <MyInput v-model.trim="searchStr" :placeholder="'Search...'" />
+            </div>
+            <div class="sorting">
+                <p>sort by</p>
+                <MySelect v-model="selectedOption" :options="sortOptions" />
+                <MySelect v-model="sortType" :options="sortTypeOptions" />
+            </div>
         </div>
-        <div>
-            <MyInput v-model="searchStr" :placeholder="'Search...'" />
-        </div>
-        <div class="sorting">
-            <p>sort by</p>
-            <MySelect v-model="selectedOption" :options="sortOptions" />
-            <MySelect v-model="sortType" :options="sortTypeOptions" />
-        </div>
+        <div v-if="isLoading">Loading ...</div>
+        <PostList v-else :posts="filteredPosts" @remove="removePost" @changePage="setPage" :totalPages="totalPages"
+            :currentPage="currentPage" />
+        <MyDialog v-model:show="isDialogVisible">
+            <PostForm @create="createPost" />
+        </MyDialog>
     </div>
-    <div v-if="isLoading">Loading ...</div>
-    <PostList v-else :posts="filteredPosts" @remove="removePost" @changePage="setPage" :totalPages="totalPages"
-        :currentPage="currentPage" />
-    <MyDialog v-model:show="isDialogVisible">
-        <PostForm @create="createPost" />
-    </MyDialog>
 </template>
 
 <style>
@@ -151,6 +153,14 @@ export default {
     justify-content: space-between;
     gap: 15px;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.show-pages {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
 }
 
 .sorting {
