@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Comment } from '../../types';
+import type { Comment } from '../../store/types';
 import CommentItem from './CommentItem.vue';
 
 

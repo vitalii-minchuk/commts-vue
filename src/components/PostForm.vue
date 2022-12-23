@@ -26,15 +26,15 @@ export default {
 </script>
 
 <template>
-    <form @submit.prevent="createNewPost">
+    <form class="form" @submit.prevent="createNewPost">
         <MyInput v-focus v-model="post.title" />
         <MyInput v-model="post.body" />
-        <MyButton type="submit">add</MyButton>
+        <MyButton color="aquamarine" type="submit">add</MyButton>
     </form>
 </template>
 
-<style>
-form {
+<style scoped>
+.form {
     display: flex;
     flex-direction: column;
     gap: 20px;

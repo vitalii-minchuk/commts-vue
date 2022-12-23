@@ -1,7 +1,7 @@
 <script lang="ts">
 import axios from 'axios';
 import CommentList from '../components/Comments/CommentList.vue';
-import { Comment } from '../types';
+import type { Comment } from '../store/types';
 
 export default {
     data() {

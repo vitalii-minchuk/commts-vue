@@ -1,12 +1,13 @@
 <script lang="ts">
 import axios from "axios"
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex"
 import MyButton from "../components/common/MyButton.vue"
 import MyDialog from "../components/common/MyDialog.vue"
 import MyInput from "../components/common/MyInput.vue"
 import MySelect from "../components/common/MySelect.vue"
 import PostForm from "../components/PostForm.vue"
 import PostList from "../components/PostList.vue"
-import { Post } from "../types"
+import type { Post } from "../store/types"
 
 export default {
     components: {
@@ -19,24 +20,15 @@ export default {
     },
     data() {
         return {
-            posts: [] as Post[],
             isDialogVisible: false,
-            isLoading: false,
-            searchStr: "",
-            selectedOption: "id",
-            sortType: "asc",
-            showPosts: 5,
-            sortTypeOptions: ["asc", "desc"],
-            sortOptions: ["id", "title", "body"],
-            showPagesOptions: [5, 10, 15],
-            currentPage: 1,
-            // limit: 6,
-            totalPages: 0
         }
     },
     methods: {
+        ...mapMutations({}),
+        ...mapActions({
+            fetchPosts: 'post/fetchPosts'
+        }),
         createPost(post: Post) {
-            // this.posts.push(post)
             this.posts = [post, ...this.posts]
             this.isDialogVisible = false
         },
@@ -48,29 +40,28 @@ export default {
         },
         setPage(newPage: number) {
             this.currentPage = newPage
-        },
-        async fetchPosts() {
-            this.isLoading = true
-            try {
-                const response = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts', {
-                    params: {
-                        _page: this.currentPage,
-                        _limit: this.showPosts
-                    }
-                })
-                this.totalPages = Math.ceil(Number(response.headers['x-total-count']) / this.showPosts)
-                this.posts = response.data
-            } catch (error: any) {
-                console.log(error.message, "something went wrong")
-            } finally {
-                this.isLoading = false
-            }
-        },
+        }
     },
     computed: {
-        filteredPosts() {
-            return [...this.posts].filter(post => post.title.includes(this.searchStr))
-        }
+        ...mapState({
+            posts: (state) => state.post.posts,
+            // isLoading: false,
+            // searchStr: "",
+            // selectedOption: "id",
+            // sortType: "asc",
+            // showPosts: 5,
+            // sortTypeOptions: ["asc", "desc"],
+            // sortOptions: ["id", "title", "body"],
+            // showPagesOptions: [5, 10, 15],
+            // currentPage: 1,
+            // totalPages: 0,
+        }),
+        ...mapGetters({
+            filteredPosts: 'post/filteredPosts'
+        }),
+        // filteredPosts() {
+        //     return [...this.posts].filter(post => post.title.includes(this.searchStr))
+        // }
     },
     watch: {
         currentPage() {
@@ -154,6 +145,7 @@ export default {
     gap: 15px;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .show-pages {

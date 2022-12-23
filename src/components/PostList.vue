@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Post } from '../types';
+import type { Post } from '../store/types';
 import Pagination from './Pagination.vue';
 import PostItem from './PostItem.vue';
 
@@ -29,9 +29,9 @@ export default {
 </script>
 
 <template>
-    <h2>Post List</h2>
-    <div v-if="!!posts?.length" class="posts">
-        <TransitionGroup name="post-list" tag="div">
+    <h2 class="title">Post List</h2>
+    <div v-if="!!posts?.length">
+        <TransitionGroup class="posts-box" name="post-list" tag="div">
             <PostItem v-for="post in posts" class="post" :post="post" :key="post.id"
                 @remove="$emit('remove', post.id)" />
         </TransitionGroup>
@@ -42,11 +42,16 @@ export default {
     </div>
 </template>
 
-<style>
-.posts {
+<style scoped>
+.posts-box {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .post-list-enter-active,
@@ -61,6 +66,6 @@ export default {
 }
 
 .post-list-move {
-    transition: transform 0.5s ease;
+    transition: transform 0.8s ease;
 }
 </style>

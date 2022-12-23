@@ -4,7 +4,12 @@ export default {
         return {
             logo: "LOGO"
         }
-    }
+    },
+    // computed: {
+    //     test():string {
+    //         return this.$store
+    //     }
+    // }
 }
 </script>
 
@@ -24,6 +29,7 @@ export default {
                         Comments
                     </RouterLink>
                 </nav>
+                <!-- <p>{{ test }}</p> -->
             </div>
         </div>
     </header>

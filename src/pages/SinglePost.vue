@@ -1,5 +1,5 @@
 <script lang="ts">import axios from 'axios'
-import { Post } from '../types'
+import type { Post } from '../store/types'
 
 export default {
     data() {

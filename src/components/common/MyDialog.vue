@@ -37,9 +37,11 @@ export default {
 .content {
     position: relative;
     min-height: 200px;
+    max-width: 440px;
     min-width: 300px;
     margin: auto;
     background-color: #fff;
+    border-radius: 8px;
 }
 
 .closeBtn {
