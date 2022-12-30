@@ -1,0 +1,12 @@
+
+overwrite: true
+schema: "http://localhost:4004/graphql"
+documents: "**/*.{gql,graphql}"
+generates:
+  src/apollo/generated/schema.ts:
+    plugins: 
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-vue-apollo"
+config:
+  withCompositionFunctions: true
