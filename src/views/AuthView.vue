@@ -1,5 +1,21 @@
 <template>
-  <div class="">
-    <h1>This is an about page</h1>
-  </div>
+  <section>
+    <div class="base-container">
+      <SignIn v-if="login" />
+      <SignUp v-else />
+      <button @click="switchMode">{{ btnCaption }}</button>
+    </div>
+  </section>
 </template>
+<script setup lang="ts">
+import SignIn from "@/components/auth/SignIn.vue";
+import SignUp from "@/components/auth/SignUp.vue";
+import { ref, computed } from "vue";
+
+const login = ref<boolean>(false);
+const btnCaption = computed(() => (login.value ? "sign up" : "sign in"));
+
+function switchMode() {
+  login.value = !login.value;
+}
+</script>

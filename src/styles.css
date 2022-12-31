@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+background-color: #eee;
+}
+
+.base-container {
+  @apply max-w-[1230px] px-[15px] mx-auto
+}
+
+.base-section-title {
+  @apply text-2xl text-center my-[30px] capitalize
+}

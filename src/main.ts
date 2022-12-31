@@ -12,6 +12,8 @@ const app = createApp({
   render: () => h(App),
 });
 
+// app.component("BaseBtn", BaseBtn);
+
 app.use(router);
 
 app.mount("#app");
