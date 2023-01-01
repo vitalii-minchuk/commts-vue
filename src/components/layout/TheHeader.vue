@@ -6,7 +6,7 @@
           <RouterLink to="/">logo</RouterLink>
         </h2>
         <div>
-          <RouterLink to="/auth">hello</RouterLink>
+          <RouterLink to="/auth">login</RouterLink>
         </div>
       </div>
     </div>

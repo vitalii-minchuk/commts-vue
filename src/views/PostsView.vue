@@ -14,7 +14,7 @@ import PostItem from "@/components/post/PostItem.vue";
 import { computed } from "vue";
 
 const { result, loading } = useGetPostsQuery({
-  posts: { take: 10, skip: 0, orderType: "asc", orderBy: "createdAt" },
+  posts: { take: 5, skip: 0, orderType: "asc", orderBy: "createdAt" },
 });
 
 const posts = computed(() => result.value?.getAllPosts);
