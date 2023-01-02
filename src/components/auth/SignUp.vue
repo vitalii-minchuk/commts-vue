@@ -25,7 +25,7 @@
           <input id="homePageUrl" type="text" v-model="homePageUrl" />
           <p v-if="homePageUrlError">{{ homePageUrlError }}</p>
         </div>
-        <button type="submit">sign up</button>
+        <button class="base-btn" type="submit">sign up</button>
       </form>
     </div>
   </section>
@@ -37,7 +37,9 @@ import {
   type UserSubmitRegisterForm,
 } from "@/validation";
 import { useField, useForm } from "vee-validate";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const { handleSubmit } = useForm<UserSubmitRegisterForm>({
   validationSchema: registerUserValidationSchema,
 });
@@ -48,14 +50,10 @@ const { value: homePageUrl, errorMessage: homePageUrlError } =
   useField("homePageUrl");
 const { value: password, errorMessage: passwordError } = useField("password");
 
-const {
-  onDone,
-  loading,
-  mutate,
-  error: fetchError,
-} = useRegisterUserMutation({});
+const { onDone, mutate } = useRegisterUserMutation({});
+const emit = defineEmits(["redirect-to-login"]);
 
-onDone(() => console.log("first"));
+onDone(() => emit("redirect-to-login"));
 
 const submitForm = handleSubmit(() => {
   mutate({
@@ -66,6 +64,5 @@ const submitForm = handleSubmit(() => {
       homePageUrl: homePageUrl.value as string,
     },
   });
-  console.log();
 });
 </script>

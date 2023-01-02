@@ -1,5 +1,6 @@
 import BaseDialog from "@/components/ui/BaseDialog.vue";
 import BaseCard from "@/components/ui/BaseCard.vue";
+import BaseToast from "@/components/ui/BaseToast.vue";
 
 const uiComponents = [
   {
@@ -9,6 +10,10 @@ const uiComponents = [
   {
     name: "BaseCard",
     component: BaseCard,
+  },
+  {
+    name: "BaseToast",
+    component: BaseToast,
   },
 ];
 

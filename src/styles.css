@@ -14,6 +14,10 @@ background-color: #eee;
   @apply text-2xl text-center my-[30px] capitalize
 }
 
+.base-btn {
+  @apply text-center border border-teal-500 rounded-sm uppercase py-1 px-4
+}
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
@@ -27,4 +31,21 @@ background-color: #eee;
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 1s ease;
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
 }

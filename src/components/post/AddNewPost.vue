@@ -15,7 +15,7 @@ import type { MessageType } from "@/types";
 import { inject, ref } from "vue";
 
 const isDialogShown = ref<boolean>(false);
-const { error, mutate, onDone } = useCreatePostMutation({});
+const { mutate, onDone } = useCreatePostMutation({});
 const refetchPosts = inject<any>("refetch-posts");
 
 function showDialog(value: boolean) {

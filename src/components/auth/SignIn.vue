@@ -13,9 +13,14 @@
           <input id="password" type="password" v-model="password" />
           <p v-if="passwordError">{{ passwordError }}</p>
         </div>
-        <button type="submit">sign in</button>
+        <button class="base-btn" type="submit">sign in</button>
       </form>
     </div>
+    <p>{{ fetchError }}</p>
+    <button @click="showToast">show</button>
+    <BaseToast v-if="isToastShown" :error="fetchError">
+      <p>{{ message }}</p>
+    </BaseToast>
   </section>
 </template>
 <script setup lang="ts">
@@ -25,7 +30,11 @@ import {
   type UserSubmitLoginForm,
 } from "@/validation";
 import { useField, useForm } from "vee-validate";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+const isToastShown = ref<boolean>(false);
 const { handleSubmit } = useForm<UserSubmitLoginForm>({
   validationSchema: loginUserValidationSchema,
 });
@@ -33,8 +42,9 @@ const { handleSubmit } = useForm<UserSubmitLoginForm>({
 const { value: email, errorMessage: emailError } = useField("email");
 const { value: password, errorMessage: passwordError } = useField("password");
 
-const { onDone, loading, mutate, error: fetchError } = useLoginMutation({});
-
+const { onDone, mutate, error: fetchError } = useLoginMutation({});
+const message = computed(() => fetchError.value?.message || "success");
+console.log(message.value);
 const submitForm = handleSubmit(() => {
   console.log(password.value, email.value);
   mutate({
@@ -44,4 +54,19 @@ const submitForm = handleSubmit(() => {
     },
   });
 });
+console.log(fetchError.value?.message);
+function showToast() {
+  isToastShown.value = true;
+
+  setTimeout(() => {
+    isToastShown.value = false;
+  }, 4000);
+}
+
+function signInSuccessHandler() {
+  router.replace("/");
+  showToast();
+}
+
+onDone(signInSuccessHandler);
 </script>
