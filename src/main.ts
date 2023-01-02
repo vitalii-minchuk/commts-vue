@@ -1,9 +1,10 @@
+import App from "@/App.vue";
+import router from "@/router";
+import "@/styles.css";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { createApp, h, provide } from "vue";
 import apolloClient from "./apollo/client";
-import App from "./App.vue";
-import router from "./router";
-import "./styles.css";
+import uiComponents from "@/components/ui";
 
 const app = createApp({
   setup() {
@@ -12,7 +13,9 @@ const app = createApp({
   render: () => h(App),
 });
 
-// app.component("BaseBtn", BaseBtn);
+uiComponents.forEach((el) => {
+  app.component(el.name, el.component);
+});
 
 app.use(router);
 

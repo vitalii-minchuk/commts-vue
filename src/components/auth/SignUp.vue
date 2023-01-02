@@ -26,21 +26,17 @@
           <p v-if="homePageUrlError">{{ homePageUrlError }}</p>
         </div>
         <button type="submit">sign up</button>
-        <p>{{ fetchError }} {{ loading }}</p>
       </form>
     </div>
   </section>
 </template>
 <script setup lang="ts">
-import {
-  useRegisterUserMutation,
-  type RegisterUserMutationVariables,
-} from "@/apollo/generated/schema";
+import { useRegisterUserMutation } from "@/apollo/generated/schema";
 import {
   registerUserValidationSchema,
   type UserSubmitRegisterForm,
 } from "@/validation";
-import { useForm, useField } from "vee-validate";
+import { useField, useForm } from "vee-validate";
 
 const { handleSubmit } = useForm<UserSubmitRegisterForm>({
   validationSchema: registerUserValidationSchema,
